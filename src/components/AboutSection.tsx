@@ -1,130 +1,126 @@
-import { useEffect, useRef, useState } from 'react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const AboutSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const skills = [
-    { icon: '🌐', name: 'Web Development', level: 'Expert Level' },
-    { icon: '⛓️', name: 'Blockchain/Web3', level: 'Advanced' },
-    { icon: '🛡️', name: 'Cybersecurity', level: 'Expert Level' },
-    { icon: '📱', name: 'Mobile Development', level: 'Advanced' },
-  ];
-
-  const techStack = [
-    'JavaScript', 'Solana', 'Smart Contracts', 'React', 
-    'Node.js', 'Python', 'Cybersecurity', 'Flutter'
-  ];
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.3, triggerOnce: true });
 
   return (
-    <section ref={sectionRef} id="about" className="py-24 relative">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/5 to-blue-900/5" />
-      
+    <section ref={ref} id="about" className="py-20 overflow-hidden">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div
-          className={`text-center mb-16 transition-all duration-700 ${
-            isVisible ? 'animate-fade-in-up opacity-100' : 'opacity-0'
-          }`}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-            About Me
-          </h2>
-          <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-            Passionate about creating secure, innovative digital experiences
-          </p>
+        {/* Split reveal title */}
+        <div className="text-center mb-16">
+          <div className="relative">
+            <h2 className="text-6xl md:text-8xl font-bold mb-4">
+              {/* Split text animation */}
+              <div className="flex justify-center items-center gap-4">
+                <span 
+                  className={`inline-block transition-all duration-1000 ease-out ${
+                    isVisible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+                  }`}
+                  style={{ transitionDelay: '200ms' }}
+                >
+                  ABOUT
+                </span>
+                <div 
+                  className={`w-16 h-1 bg-primary transition-all duration-800 ${
+                    isVisible ? 'scale-x-100' : 'scale-x-0'
+                  }`}
+                  style={{ transitionDelay: '800ms' }}
+                />
+                <span 
+                  className={`inline-block transition-all duration-1000 ease-out ${
+                    isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+                  }`}
+                  style={{ transitionDelay: '600ms' }}
+                >
+                  ME
+                </span>
+              </div>
+            </h2>
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Profile Image */}
-          <div
-            className={`relative flex justify-center transition-all duration-700 ${
-              isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0'
+        {/* Content grid with staggered reveals */}
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          {/* Left content */}
+          <div 
+            className={`space-y-6 transition-all duration-1000 ease-out ${
+              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
             }`}
-            style={{ animationDelay: '0.2s' }}
+            style={{ transitionDelay: '400ms' }}
           >
-            <div className="relative">
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full blur-3xl opacity-30 animate-pulse-glow" />
-              
-              {/* Profile Image Container */}
-              <div className="relative w-80 h-80 glass-card rounded-full p-2">
-                <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full flex items-center justify-center text-6xl">
-                  👨‍💻
-                </div>
-              </div>
+            <div className="space-y-4">
+              <h3 className="text-2xl font-semibold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                Security Professional & Developer
+              </h3>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Passionate about creating secure digital solutions with cutting-edge cybersecurity 
+                implementations and innovative Web3 integrations for the future of the internet.
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                With expertise spanning penetration testing, secure coding practices, and blockchain 
+                technology, I bridge the gap between security and innovation.
+              </p>
+            </div>
+
+            {/* Skills tags */}
+            <div className="flex flex-wrap gap-3">
+              {['Cybersecurity', 'Web3', 'React', 'Blockchain', 'Penetration Testing', 'DevSecOps'].map((skill, index) => (
+                <span 
+                  key={skill}
+                  className={`px-4 py-2 glass-card text-sm font-medium transition-all duration-500 hover:scale-105 ${
+                    isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                  }`}
+                  style={{ transitionDelay: `${800 + index * 100}ms` }}
+                >
+                  {skill}
+                </span>
+              ))}
             </div>
           </div>
 
-          {/* Content */}
-          <div
-            className={`space-y-8 transition-all duration-700 ${
-              isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0'
+          {/* Right visual */}
+          <div 
+            className={`relative transition-all duration-1200 ease-out ${
+              isVisible ? 'translate-x-0 opacity-100' : 'translate-x-16 opacity-0'
             }`}
-            style={{ animationDelay: '0.4s' }}
+            style={{ transitionDelay: '600ms' }}
           >
-            {/* Description */}
-            <p className="text-lg text-foreground/80 leading-relaxed">
-              I'm a passionate full-stack developer with a deep focus on creating beautiful,
-              functional web experiences while implementing robust security measures. My expertise
-              spans across modern web technologies, blockchain development, and cybersecurity protocols.
-            </p>
-
-            {/* Skills Grid */}
-            <div className="space-y-4">
-              {skills.map((skill, index) => (
-                <div
-                  key={index}
-                  className={`glass-card p-4 rounded-lg flex items-center gap-4 group hover:scale-105 transition-all duration-300 ${
-                    isVisible ? 'animate-fade-in-up opacity-100' : 'opacity-0'
-                  }`}
-                  style={{ animationDelay: `${0.6 + index * 0.1}s` }}
-                >
-                  <div className="text-2xl">{skill.icon}</div>
-                  <div className="flex-1">
-                    <div className="font-semibold text-foreground">{skill.name}</div>
-                    <div className="text-sm text-foreground/60">{skill.level}</div>
-                  </div>
-                  <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="glass-card p-8 rounded-2xl">
+              <div className="space-y-6">
+                <div className="text-4xl font-bold text-center bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
+                  3+ Years
                 </div>
-              ))}
-            </div>
-
-            {/* Tech Stack */}
-            <div
-              className={`transition-all duration-700 ${
-                isVisible ? 'animate-fade-in-up opacity-100' : 'opacity-0'
-              }`}
-              style={{ animationDelay: '1s' }}
-            >
-              <h3 className="text-lg font-semibold mb-4 text-foreground">Tech Stack</h3>
-              <div className="flex flex-wrap gap-3">
-                {techStack.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 glass-card rounded-full text-sm hover:scale-105 transition-transform duration-200 cursor-default"
-                  >
-                    {tech}
-                  </span>
-                ))}
+                <div className="text-center text-muted-foreground">
+                  Experience in cybersecurity and secure development
+                </div>
+                
+                {/* Animated progress bars */}
+                <div className="space-y-4">
+                  {[
+                    { skill: 'Cybersecurity', level: 95 },
+                    { skill: 'Web Development', level: 90 },
+                    { skill: 'Web3 & Blockchain', level: 85 }
+                  ].map((item, index) => (
+                    <div key={item.skill} className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span>{item.skill}</span>
+                        <span>{item.level}%</span>
+                      </div>
+                      <div className="w-full bg-muted rounded-full h-2">
+                        <div 
+                          className={`h-2 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full transition-all duration-1500 ease-out ${
+                            isVisible ? 'scale-x-100' : 'scale-x-0'
+                          }`}
+                          style={{ 
+                            width: `${item.level}%`,
+                            transformOrigin: 'left',
+                            transitionDelay: `${1200 + index * 200}ms`
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

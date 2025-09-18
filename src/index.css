@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,64 +10,71 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Core colors */
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    /* Coolors Palette Colors */
+    --dark-navy: 213 43% 9%;      /* #0e131f */
+    --slate-blue: 226 24% 30%;    /* #38405f */
+    --dusty-purple: 270 10% 40%;  /* #59546c */
+    --light-gray: 218 8% 58%;     /* #8b939c */
+    --bright-red: 348 100% 50%;   /* #ff0035 */
+    
+    /* Core colors using new palette */
+    --background: 0 0% 100%;
+    --foreground: var(--dark-navy);
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 98%;
+    --card-foreground: var(--dark-navy);
 
-    --popover: 240 5% 6%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 98%;
+    --popover-foreground: var(--dark-navy);
 
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
+    --primary: var(--bright-red);
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: var(--dusty-purple);
+    --secondary-foreground: var(--dark-navy);
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: var(--slate-blue);
+    --muted-foreground: var(--light-gray);
 
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 0 0% 98%;
+    --accent: var(--dusty-purple);
+    --accent-foreground: var(--dark-navy);
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: var(--bright-red);
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 142.4 71.8% 29.2%;
+    --border: var(--dusty-purple);
+    --input: var(--slate-blue);
+    --ring: var(--bright-red);
 
     --radius: 0.75rem;
     
-    /* Portfolio Design System */
-    --cyber-blue: 217 91% 60%;
-    --cyber-purple: 262 83% 58%;
-    --cyber-cyan: 189 96% 53%;
-    --cyber-pink: 322 88% 65%;
-    --cyber-green: 142 76% 36%;
+    /* Portfolio Design System with new colors */
+    --cyber-blue: var(--slate-blue);
+    --cyber-purple: var(--dusty-purple);
+    --cyber-cyan: 190 50% 45%;
+    --cyber-pink: var(--bright-red);
+    --cyber-green: 142 60% 45%;
     
-    /* Gradients */
-    --primary-gradient: linear-gradient(135deg, hsl(var(--cyber-blue)), hsl(var(--cyber-purple)));
-    --accent-gradient: linear-gradient(135deg, hsl(var(--cyber-cyan)), hsl(var(--cyber-pink)));
-    --brand-gradient: linear-gradient(135deg, hsl(var(--cyber-green)), hsl(var(--cyber-cyan)));
+    /* Gradients using new palette */
+    --primary-gradient: linear-gradient(135deg, hsl(var(--bright-red)), hsl(var(--dusty-purple)));
+    --accent-gradient: linear-gradient(135deg, hsl(var(--slate-blue)), hsl(var(--light-gray)));
+    --brand-gradient: linear-gradient(135deg, hsl(var(--bright-red)), hsl(var(--slate-blue)));
     --hero-gradient: linear-gradient(135deg, 
       hsl(var(--background)) 0%, 
-      hsl(var(--cyber-blue) / 0.05) 50%, 
-      hsl(var(--cyber-purple) / 0.08) 100%);
+      hsl(var(--slate-blue) / 0.15) 50%, 
+      hsl(var(--dusty-purple) / 0.08) 100%);
     
-    /* Glass morphism */
-    --glass-bg: hsl(var(--foreground) / 0.02);
-    --glass-border: hsl(var(--foreground) / 0.08);
+    /* Glass morphism with light background */
+    --glass-bg: hsl(0 0% 100% / 0.8);
+    --glass-border: hsl(var(--slate-blue) / 0.2);
     --glass-blur: blur(20px);
     
-    /* Shadows */
-    --shadow-sm: 0 1px 2px hsl(var(--cyber-blue) / 0.1);
-    --shadow-md: 0 4px 6px hsl(var(--cyber-blue) / 0.1);
-    --shadow-lg: 0 10px 15px hsl(var(--cyber-blue) / 0.1);
-    --shadow-xl: 0 20px 25px hsl(var(--cyber-blue) / 0.15);
-    --shadow-glow: 0 0 30px hsl(var(--cyber-blue) / 0.3);
+    /* Shadows for light background */
+    --shadow-sm: 0 1px 2px hsl(var(--slate-blue) / 0.1);
+    --shadow-md: 0 4px 6px hsl(var(--slate-blue) / 0.15);
+    --shadow-lg: 0 10px 15px hsl(var(--slate-blue) / 0.1);
+    --shadow-xl: 0 20px 25px hsl(var(--slate-blue) / 0.15);
+    --shadow-glow: 0 0 30px hsl(var(--bright-red) / 0.3);
     
     /* Spacing */
     --space-xs: 0.25rem;
@@ -82,28 +91,23 @@ All colors MUST be HSL.
     --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
+    /* Sidebar colors */
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .light {
     --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --glass-bg: hsl(var(--background) / 0.8);
-    --glass-border: hsl(var(--foreground) / 0.12);
+    --foreground: var(--dark-navy);
+    --card: 0 0% 98%;
+    --glass-bg: hsl(0 0% 100% / 0.8);
+    --glass-border: hsl(var(--slate-blue) / 0.15);
   }
 }
 
@@ -114,7 +118,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground overflow-x-hidden;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
   }
   
   html {
@@ -226,15 +230,16 @@ All colors MUST be HSL.
     background: var(--accent-gradient);
   }
   
-  /* Selection */
+  /* Selection with new color */
   ::selection {
-    background: hsl(var(--cyber-blue) / 0.3);
+    background: hsl(var(--bright-red) / 0.3);
+    color: hsl(var(--foreground));
   }
   
   /* Focus styles */
   .btn-primary:focus-visible,
   .btn-secondary:focus-visible {
-    outline: 2px solid hsl(var(--cyber-blue));
+    outline: 2px solid hsl(var(--bright-red));
     outline-offset: 2px;
   }
   

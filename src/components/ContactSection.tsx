@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -43,14 +43,14 @@ const ContactSection = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'okelozikora@example.com',
-      href: 'mailto:okelozikora@example.com'
+      value: 'Callm3samuel@gmail.com',
+      href: 'mailto:Callm3samuel@gmail.com'
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
+      value: '+234 901 117 2838',
+      href: 'tel:+234 901 117 2838'
     },
     {
       icon: MapPin,
@@ -61,9 +61,10 @@ const ContactSection = () => {
   ];
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+    { icon: Github, href: 'https://github.com/Zikrypt', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/zikora-okelo-8818252a8', label: 'LinkedIn' },
+    { icon: Twitter, href: 'https://x.com/HACKWITHZIK?t=9xLb6f-1sVy4CgdFp2sOWw&s=09', label: 'Twitter' },
+    { icon: Instagram, href: 'https://www.instagram.com/_zikora.__?igsh=NmtidXp3OGE3b2Mw', label: 'Twitter' },
   ];
 
   return (

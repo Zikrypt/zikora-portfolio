@@ -4,6 +4,7 @@ import AboutSection from '@/components/AboutSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import ContactSection from '@/components/ContactSection';
 import FloatingParticles from '@/components/FloatingParticles';
+import AnimatedFooter from '@/components/AnimatedFooter';
 
 const Index = () => {
   return (
@@ -22,14 +23,8 @@ const Index = () => {
         <ContactSection />
       </main>
       
-      {/* Footer */}
-      <footer className="py-8 text-center glass-card">
-        <div className="container mx-auto px-4">
-          <p className="text-foreground/60">
-            © 2024 Okelo Zikora. Crafted with passion and secured with expertise.
-          </p>
-        </div>
-      </footer>
+      {/* Animated Footer */}
+      <AnimatedFooter />
     </div>
   );
 };
