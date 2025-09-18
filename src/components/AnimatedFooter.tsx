@@ -21,6 +21,20 @@ const AnimatedFooter = () => {
     { name: 'Instagram', href: 'https://www.instagram.com/_zikora.__?igsh=NmtidXp3OGE3b2Mw' },
   ];
 
+  const programmingLanguages = [
+    { name: 'HTML', level: 95, icon: '🌐', color: 'text-orange-500' },
+    { name: 'CSS', level: 90, icon: '🎨', color: 'text-blue-400' },
+    { name: 'JavaScript', level: 88, icon: '⚡', color: 'text-yellow-400' },
+    { name: 'TypeScript', level: 85, icon: '📘', color: 'text-blue-600' },
+    { name: 'React', level: 90, icon: '⚛️', color: 'text-cyan-400' },
+    { name: 'Java', level: 80, icon: '☕', color: 'text-red-500' },
+    { name: 'Python', level: 75, icon: '🐍', color: 'text-green-400' },
+    { name: 'C++', level: 78, icon: '⚙️', color: 'text-blue-300' },
+    { name: 'Tailwind CSS', level: 92, icon: '🎭', color: 'text-teal-400' },
+    { name: 'Node.js', level: 85, icon: '🟢', color: 'text-green-500' },
+    { name: 'Solidity', level: 70, icon: '💎', color: 'text-purple-400' },
+  ];
+
   return (
     <>
       <style>{`
@@ -68,6 +82,15 @@ const AnimatedFooter = () => {
           }
         }
 
+        @keyframes infinite-scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
         .gradient-text-hero {
           background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
           -webkit-background-clip: text;
@@ -80,6 +103,56 @@ const AnimatedFooter = () => {
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
+        }
+
+        /* Glass card effect */
+        .glass-card {
+          backdrop-filter: blur(10px);
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Horizontal scroll animation */
+        .animate-infinite-scroll {
+          animation: infinite-scroll 30s linear infinite;
+        }
+
+        .animate-infinite-scroll:hover {
+          animation-play-state: paused;
+        }
+
+        /* Duplicate content for seamless loop */
+        .duplicate-content {
+          display: flex;
+          width: max-content;
+        }
+
+        .duplicate-content > * {
+          flex-shrink: 0;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+          @keyframes infinite-scroll {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-100%);
+            }
+          }
+          
+          .animate-infinite-scroll {
+            animation: infinite-scroll 20s linear infinite;
+          }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+          .animate-infinite-scroll {
+            animation: none;
+          }
         }
       `}</style>
 
@@ -116,16 +189,16 @@ const AnimatedFooter = () => {
 
         {/* Main content that slides up */}
         <div 
-          className="absolute inset-0 flex items-center justify-center text-white"
+          className="absolute inset-0 flex flex-col justify-center text-white px-4"
           style={{
             animation: isVisible ? 'footerSlideUp 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.3s both' : 'none'
           }}
         >
-          <div className="container mx-auto px-4 text-center space-y-12 relative z-10">
+          <div className="container mx-auto text-center space-y-12 relative z-10">
             
             {/* Main CTA with staggered letter reveals */}
             <div className="space-y-8">
-              <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
+              <h2 className="text-4xl md:text-7xl lg:text-8xl font-bold leading-tight">
                 <div className="overflow-hidden mb-4">
                   <span 
                     className="block gradient-text-hero"
@@ -174,20 +247,22 @@ const AnimatedFooter = () => {
             {/* CTA Button */}
             <div className="overflow-hidden">
               <button 
-                className="group relative overflow-hidden px-12 py-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-xl text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="group relative overflow-hidden px-8 md:px-12 py-4 md:py-6 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-lg md:text-xl text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                 style={{
-                  animation: isVisible ? 'clipRevealUp 1.0s cubic-bezier(0.77, 0, 0.175, 1) 1.6s both' : 'none'
+                  animation: isVisible ? 'clipRevealUp 1.0s cubic-bezier(0.77, 0, 0.175, 1) 1.6s both' : 'none',
+                  minHeight: '60px',
+                  minWidth: '200px'
                 }}
               >
                 <span className="relative z-10">
-                  <a href="tel:+234 901 117 2838">Get In Touch</a>
+                  <a href="tel:+2349011172838">Get In Touch</a>
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </button>
             </div>
 
             {/* Contact Details */}
-            <div className="grid md:grid-cols-2 gap-8 pt-12">
+            <div className="grid md:grid-cols-2 gap-8 pt-8">
               {/* Email */}
               <div className="overflow-hidden">
                 <div 
@@ -199,7 +274,7 @@ const AnimatedFooter = () => {
                   <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-400">Email</h3>
                   <a 
                     href="mailto:Callm3samuel@gmail.com"
-                    className="text-xl font-medium hover:text-blue-400 transition-colors duration-300 block"
+                    className="text-lg md:text-xl font-medium hover:text-blue-400 transition-colors duration-300 block"
                   >
                     Callm3samuel@gmail.com
                   </a>
@@ -216,8 +291,8 @@ const AnimatedFooter = () => {
                 >
                   <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-400">Phone</h3>
                   <a 
-                    href="tel:+234 901 117 2838"
-                    className="text-xl font-medium hover:text-blue-400 transition-colors duration-300 block"
+                    href="tel:+2349011172838"
+                    className="text-lg md:text-xl font-medium hover:text-blue-400 transition-colors duration-300 block"
                   >
                     +234 901 117 2838
                   </a>
@@ -226,9 +301,9 @@ const AnimatedFooter = () => {
             </div>
 
             {/* Social Links */}
-            <div className="pt-12 overflow-hidden">
+            <div className="pt-8 overflow-hidden">
               <div 
-                className="flex justify-center space-x-8"
+                className="flex justify-center space-x-6 md:space-x-8"
                 style={{
                   animation: isVisible ? 'clipRevealUp 1.0s cubic-bezier(0.77, 0, 0.175, 1) 2.2s both' : 'none'
                 }}
@@ -239,7 +314,7 @@ const AnimatedFooter = () => {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 font-medium"
+                    className="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 font-medium text-sm md:text-base"
                     style={{
                       animation: isVisible ? `clipRevealUp 0.8s cubic-bezier(0.77, 0, 0.175, 1) ${2.4 + index * 0.1}s both` : 'none'
                     }}
@@ -249,18 +324,56 @@ const AnimatedFooter = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
 
-            {/* Footer Bottom */}
-            <div className="pt-12 border-t border-gray-700 overflow-hidden">
-              <div 
-                className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-gray-400"
-                style={{
-                  animation: isVisible ? 'clipRevealUp 1.0s cubic-bezier(0.77, 0, 0.175, 1) 2.6s both' : 'none'
-                }}
-              >
-                <p>&copy; 2024 Zikora Okelo. All rights reserved.</p>
-                <p>Crafted with security and innovation in mind.</p>
-              </div>
+        {/* Programming Languages Horizontal Scroll - Positioned at bottom */}
+        <div className="absolute bottom-20 w-full overflow-hidden py-6 z-20">
+          <div 
+            className="animate-infinite-scroll"
+            style={{
+              animation: isVisible ? 'infinite-scroll 30s linear infinite' : 'none',
+              animationDelay: '2.8s'
+            }}
+          >
+            <div className="duplicate-content">
+              {/* First set */}
+              {programmingLanguages.map((lang, index) => (
+                <div
+                  key={`first-${index}`}
+                  className="inline-flex items-center mx-3 px-6 py-3 glass-card rounded-full text-white text-sm md:text-base font-medium hover:scale-105 transition-transform duration-300"
+                >
+                  <span className={`text-2xl mr-3 ${lang.color}`}>{lang.icon}</span>
+                  <span className="mr-3">{lang.name}</span>
+                  <span className="text-blue-300 font-bold">{lang.level}%</span>
+                </div>
+              ))}
+              {/* Duplicate set for seamless loop */}
+              {programmingLanguages.map((lang, index) => (
+                <div
+                  key={`second-${index}`}
+                  className="inline-flex items-center mx-3 px-6 py-3 glass-card rounded-full text-white text-sm md:text-base font-medium hover:scale-105 transition-transform duration-300"
+                >
+                  <span className={`text-2xl mr-3 ${lang.color}`}>{lang.icon}</span>
+                  <span className="mr-3">{lang.name}</span>
+                  <span className="text-blue-300 font-bold">{lang.level}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Bottom */}
+        <div className="absolute bottom-0 left-0 right-0 border-t border-gray-700 bg-slate-900/50 backdrop-blur-sm overflow-hidden z-30">
+          <div 
+            className="container mx-auto px-4 py-6"
+            style={{
+              animation: isVisible ? 'clipRevealUp 1.0s cubic-bezier(0.77, 0, 0.175, 1) 2.6s both' : 'none'
+            }}
+          >
+            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-gray-400">
+              <p>&copy; 2024 Zikora Okelo. All rights reserved.</p>
+              <p>Crafted with security and innovation in mind.</p>
             </div>
           </div>
         </div>
