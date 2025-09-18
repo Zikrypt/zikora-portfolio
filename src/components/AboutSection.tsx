@@ -85,10 +85,10 @@ const AboutSection = () => {
           </h2>
         </div>
 
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-12 lg:gap-16 items-start">
           
           {/* Left Content with Line Studio Style Reveals */}
-          <div className="space-y-8">
+          <div className="space-y-8 lg:col-span-2">
             
             {/* Title with clip reveal */}
             <div className="overflow-hidden">
@@ -98,7 +98,7 @@ const AboutSection = () => {
                   animation: isVisible ? 'clipRevealLeft 1.0s cubic-bezier(0.77, 0, 0.175, 1) 0.5s both' : 'none'
                 }}
               >
-                Security Professional & Developer
+                 Cybersecurity Professional, WEB3 Enthusiast & Programmer
               </h3>
             </div>
             
@@ -164,80 +164,115 @@ const AboutSection = () => {
             </div>
           </div>
 
-          {/* Right Content - Combined Skills Cards and Progress */}
-          <div className="space-y-8">
-            
-            {/* Skills Cards with Line Studio Style Reveals */}
-            <div className="space-y-4 sm:space-y-6">
-              {skills.map((skill, index) => {
-                const Icon = skill.icon;
-                return (
-                  <div
-                    key={skill.title}
-                    className="group glass-card p-4 sm:p-6 lg:p-8 rounded-2xl hover:scale-105 transition-all duration-500 magnetic-btn overflow-hidden"
-                    style={{
-                      animation: isVisible ? `clipRevealRight 1.0s cubic-bezier(0.77, 0, 0.175, 1) ${0.5 + index * 0.2}s both` : 'none'
-                    }}
-                  >
-                    <div className="flex items-start gap-3 sm:gap-4">
-                      <div className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-2xl bg-gradient-to-br ${skill.color} flex items-center justify-center group-hover:rotate-6 transition-transform duration-300 flex-shrink-0`}>
-                        <Icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
-                      </div>
-                      
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 group-hover:text-primary transition-colors duration-300">
-                          {skill.title}
-                        </h4>
-                        <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
-                          {skill.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Experience Stats Card */}
+          {/* Professional Photo Section */}
+          <div className="flex justify-center lg:justify-end">
             <div 
-              className="glass-card p-6 sm:p-8 rounded-2xl overflow-hidden"
+              className="relative group"
               style={{
-                animation: isVisible ? 'clipRevealRight 1.0s cubic-bezier(0.77, 0, 0.175, 1) 1.1s both' : 'none'
+                animation: isVisible ? 'clipRevealRight 1.0s cubic-bezier(0.77, 0, 0.175, 1) 0.5s both' : 'none'
               }}
             >
-              <div className="space-y-6">
-                <div className="text-center">
-                  <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
-                    3+ Years
+              <div className="glass-card rounded-2xl p-2 overflow-hidden transform transition-all duration-700 group-hover:scale-105">
+                <div className="w-full h-64 sm:h-80 md:h-96 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-xl overflow-hidden relative">
+                  {/* Replace this div with your actual image */}
+                  <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
+                    <span className="text-gray-600 text-sm"><img src="/images/recruit.jpg.jpg" alt="my professional shoot" /></span>
                   </div>
-                  <div className="text-sm sm:text-base text-muted-foreground mt-2">
-                    Experience in cybersecurity and secure development
-                  </div>
+                  {/* Actual image usage (commented out for now) */}
+                  {/* <img
+                    src="/path/to/your/photo.jpg"
+                    alt="Okelo Zikora - Security Professional & Developer"
+                    className="w-full h-full object-cover"
+                  /> */}
                 </div>
                 
-                {/* Animated progress bars */}
-                <div className="space-y-4">
-                  {progressSkills.map((item, index) => (
-                    <div key={item.skill} className="space-y-2">
-                      <div className="flex justify-between text-xs sm:text-sm">
-                        <span className="font-medium">{item.skill}</span>
-                        <span className="text-muted-foreground">{item.level}%</span>
-                      </div>
-                      <div className="w-full bg-muted rounded-full h-2">
-                        <div 
-                          className={`h-2 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full transition-all duration-1500 ease-out ${
-                            isVisible ? 'scale-x-100' : 'scale-x-0'
-                          }`}
-                          style={{ 
-                            width: `${item.level}%`,
-                            transformOrigin: 'left',
-                            transitionDelay: `${1400 + index * 200}ms`
-                          }}
-                        />
-                      </div>
+                {/* Decorative elements */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+                <div className="absolute top-4 -right-4 w-24 h-24 bg-yellow-400/10 rounded-full blur-xl group-hover:scale-125 transition-transform duration-700 -z-10" />
+                <div className="absolute bottom-4 -left-4 w-16 h-16 bg-blue-400/10 rounded-full blur-xl group-hover:scale-125 transition-transform duration-700 -z-10" />
+              </div>
+              
+              {/* Floating badge */}
+              <div className="absolute -top-3 -right-3 glass-card px-3 py-1 rounded-full text-xs font-bold">
+                <span className="gradient-text">Available</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Content - Combined Skills Cards and Progress */}
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 mt-16">
+          
+          {/* Skills Cards with Line Studio Style Reveals */}
+          <div className="space-y-4 sm:space-y-6">
+            {skills.map((skill, index) => {
+              const Icon = skill.icon;
+              return (
+                <div
+                  key={skill.title}
+                  className="group glass-card p-4 sm:p-6 lg:p-8 rounded-2xl hover:scale-105 transition-all duration-500 magnetic-btn overflow-hidden"
+                  style={{
+                    animation: isVisible ? `clipRevealRight 1.0s cubic-bezier(0.77, 0, 0.175, 1) ${0.5 + index * 0.2}s both` : 'none'
+                  }}
+                >
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-2xl bg-gradient-to-br ${skill.color} flex items-center justify-center group-hover:rotate-6 transition-transform duration-300 flex-shrink-0`}>
+                      <Icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
                     </div>
-                  ))}
+                    
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 group-hover:text-primary transition-colors duration-300">
+                        {skill.title}
+                      </h4>
+                      <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
+                        {skill.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
+              );
+            })}
+          </div>
+
+          {/* Experience Stats Card */}
+          <div 
+            className="glass-card p-6 sm:p-8 rounded-2xl overflow-hidden"
+            style={{
+              animation: isVisible ? 'clipRevealRight 1.0s cubic-bezier(0.77, 0, 0.175, 1) 1.1s both' : 'none'
+            }}
+          >
+            <div className="space-y-6">
+              <div className="text-center">
+                <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
+                  3+ Years
+                </div>
+                <div className="text-sm sm:text-base text-muted-foreground mt-2">
+                  Experience in cybersecurity and secure development
+                </div>
+              </div>
+              
+              {/* Animated progress bars */}
+              <div className="space-y-4">
+                {progressSkills.map((item, index) => (
+                  <div key={item.skill} className="space-y-2">
+                    <div className="flex justify-between text-xs sm:text-sm">
+                      <span className="font-medium">{item.skill}</span>
+                      <span className="text-muted-foreground">{item.level}%</span>
+                    </div>
+                    <div className="w-full bg-muted rounded-full h-2">
+                      <div 
+                        className={`h-2 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full transition-all duration-1500 ease-out ${
+                          isVisible ? 'scale-x-100' : 'scale-x-0'
+                        }`}
+                        style={{ 
+                          width: `${item.level}%`,
+                          transformOrigin: 'left',
+                          transitionDelay: `${1400 + index * 200}ms`
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

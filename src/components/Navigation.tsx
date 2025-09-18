@@ -8,13 +8,11 @@ const Navigation = () => {
   const [activeSection, setActiveSection] = useState('#home');
 
   useEffect(() => {
-    // Start navigation animation immediately
     setIsVisible(true);
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      // Update active section based on scroll position
       const sections = ['#home', '#about', '#projects', '#contact'];
       const currentSection = sections.find(section => {
         const element = document.querySelector(section);
@@ -30,6 +28,19 @@ const Navigation = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   const navItems = [
     { href: '#home', label: 'Home' },
@@ -49,7 +60,7 @@ const Navigation = () => {
 
   return (
     <>
-      {/* Navbar Container with responsive slide down animation */}
+      {/* Combined Navigation */}
       <header
         className={`fixed top-0 w-full z-50 transition-all duration-900 px-responsive ${
           scrolled ? 'glass-card py-1 sm:py-2' : 'py-2 sm:py-3 md:py-4'
@@ -59,77 +70,50 @@ const Navigation = () => {
         }}
       >
         <nav className="container-responsive flex items-center justify-between max-w-7xl">
-          {/* Logo with responsive sizing and blur-to-focus effect */}
+          {/* Logo with Scalvini style */}
           <div
             className={`text-lg sm:text-xl md:text-2xl font-bold cursor-pointer transition-all duration-700 ease-out ${
               isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-85'
             }`}
             style={{ 
               transitionDelay: isVisible ? '200ms' : '0ms',
-              background: 'linear-gradient(135deg, hsl(var(--bright-red)), hsl(var(--dusty-purple)))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
               filter: isVisible ? 'blur(0px)' : 'blur(5px)'
             }}
             onClick={() => scrollToSection('#home')}
           >
-            Okelo Zikora
+            <span className="gradient-text-hero">Okelo Zikora Samuel</span>
           </div>
 
-          {/* Desktop Navigation with responsive spacing and staggered reveal */}
-          <ul className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8">
+          {/* Desktop Navigation with Scalvini minimal style */}
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => (
-              <li key={item.href} className="relative">
-                <button
-                  onClick={() => scrollToSection(item.href)}
-                  className={`relative px-2 py-2 md:px-3 lg:px-4 font-medium text-sm lg:text-base transition-all duration-500 ease-out group touch-manipulation ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 md:translate-y-6'
-                  } ${
-                    activeSection === item.href 
-                      ? 'font-bold' 
-                      : ''
-                  }`}
-                  style={{ 
-                    transitionDelay: isVisible ? `${400 + index * 120}ms` : '0ms',
-                    transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                    color: activeSection === item.href 
-                      ? 'hsl(var(--bright-red))' 
-                      : 'hsl(var(--dark-navy))',
-                    minHeight: '44px',
-                    minWidth: '44px'
-                  }}
-                >
-                  {/* Text with smooth color transition */}
-                  <span className={`relative z-10 transition-colors duration-300 ease-in-out ${
-                    activeSection !== item.href ? 'group-hover:text-white' : ''
-                  }`}>
-                    {item.label}
-                  </span>
-                  
-                  {/* Slide-in background effect - disabled on touch devices for performance */}
-                  <div 
-                    className="absolute inset-0 rounded-lg scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-400 ease-out hidden hover:block"
-                    style={{
-                      background: 'linear-gradient(135deg, hsl(var(--bright-red)), hsl(var(--dusty-purple)))',
-                      transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-                    }}
-                  />
-                  
-                  {/* Animated underline */}
-                  <span 
-                    className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-gradient-to-r from-[hsl(var(--bright-red))] to-[hsl(var(--dusty-purple))] transition-all duration-400 ease-out ${
-                      activeSection === item.href 
-                        ? 'w-3/4' 
-                        : 'w-0 group-hover:w-3/4'
-                    }`}
-                  />
-                </button>
-              </li>
+              <button
+                key={item.href}
+                onClick={() => scrollToSection(item.href)}
+                className={`relative font-medium transition-all duration-300 hover:text-primary ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 md:translate-y-6'
+                } ${
+                  activeSection === item.href 
+                    ? 'text-primary' 
+                    : 'text-muted-foreground'
+                }`}
+                style={{ 
+                  transitionDelay: isVisible ? `${400 + index * 120}ms` : '0ms',
+                  transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                  minHeight: '44px',
+                  minWidth: '44px'
+                }}
+              >
+                {item.label}
+                {/* Minimal active indicator */}
+                {activeSection === item.href && (
+                  <div className="absolute -bottom-1 left-0 w-full h-px bg-primary" />
+                )}
+              </button>
             ))}
-          </ul>
+          </div>
 
-          {/* Mobile Menu Button with responsive sizing and morphing animation */}
+          {/* Mobile Menu Button with morphing animation */}
           <button
             className={`md:hidden p-2 sm:p-3 rounded-lg glass-card transition-all duration-700 ease-out relative overflow-hidden touch-manipulation ${
               isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-85'
@@ -159,87 +143,81 @@ const Navigation = () => {
             </div>
           </button>
 
-          {/* Mobile Navigation with responsive slide-in effect */}
-          <div
-            className={`md:hidden fixed inset-0 top-12 sm:top-16 md:top-20 transition-all duration-600 ease-out z-40 ${
-              isMenuOpen 
-                ? 'translate-x-0 opacity-100' 
-                : 'translate-x-full opacity-0'
-            }`}
-            style={{
-              background: 'linear-gradient(135deg, hsl(var(--background) / 0.98), hsl(var(--slate-blue) / 0.08))',
-              backdropFilter: 'blur(20px)'
-            }}
-          >
-            {/* Background overlay */}
+          {/* Scalvini Style Fullscreen Menu Overlay */}
+          {isMenuOpen && (
             <div 
-              className={`absolute inset-0 transition-opacity duration-600 ${
-                isMenuOpen ? 'opacity-60' : 'opacity-0'
-              }`}
-              style={{ background: 'hsl(var(--dark-navy) / 0.1)' }}
-              onClick={() => setIsMenuOpen(false)}
-            />
-            
-            <ul className="relative flex flex-col items-center pt-8 sm:pt-12 space-y-4 sm:space-y-6 md:space-y-8 px-4">
-              {navItems.map((item, index) => (
-                <li key={item.href} className="w-full max-w-xs">
-                  <button
-                    onClick={() => scrollToSection(item.href)}
-                    className={`relative w-full text-xl sm:text-2xl font-medium transition-all duration-450 ease-out group px-6 sm:px-8 py-3 sm:py-4 rounded-lg touch-manipulation ${
-                      isMenuOpen 
-                        ? 'opacity-100 translate-y-0' 
-                        : 'opacity-0 translate-y-5 sm:translate-y-7'
-                    } ${
-                      activeSection === item.href 
-                        ? 'font-bold' 
-                        : ''
-                    }`}
-                    style={{ 
-                      transitionDelay: isMenuOpen ? `${index * 100}ms` : '0ms',
-                      color: activeSection === item.href 
-                        ? 'hsl(var(--bright-red))' 
-                        : 'hsl(var(--dark-navy))',
-                      minHeight: '44px'
+              className="fixed inset-0 z-40 flex items-center justify-center md:hidden"
+              style={{
+                background: 'hsl(var(--background))',
+                animation: 'menuOverlayIn 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards'
+              }}
+            >
+              {/* Menu Items */}
+              <div className="text-center space-y-8">
+                {navItems.map((item, index) => (
+                  <div
+                    key={item.href}
+                    className="overflow-hidden"
+                    style={{
+                      animation: `clipRevealUp 0.8s cubic-bezier(0.77, 0, 0.175, 1) ${0.2 + index * 0.1}s both`
                     }}
                   >
-                    {/* Mobile text with hover effect */}
-                    <span className={`relative z-10 transition-colors duration-300 ease-in-out block ${
-                      activeSection !== item.href ? 'group-active:text-white' : ''
-                    }`}>
-                      {item.label}
-                    </span>
-                    
-                    {/* Mobile slide background - only on active tap */}
-                    <div 
-                      className="absolute inset-0 rounded-lg scale-x-0 group-active:scale-x-100 origin-left transition-transform duration-300 ease-out"
-                      style={{
-                        background: 'linear-gradient(135deg, hsl(var(--bright-red)), hsl(var(--dusty-purple)))'
-                      }}
-                    />
-                    
-                    {/* Mobile underline */}
-                    <span 
-                      className={`absolute bottom-1 sm:bottom-2 left-1/2 transform -translate-x-1/2 h-0.5 bg-gradient-to-r from-[hsl(var(--bright-red))] to-[hsl(var(--dusty-purple))] transition-all duration-400 ease-out ${
+                    <button
+                      onClick={() => scrollToSection(item.href)}
+                      className={`block text-4xl md:text-6xl font-bold transition-all duration-300 hover:text-primary ${
                         activeSection === item.href 
-                          ? 'w-3/4' 
-                          : 'w-0 group-active:w-3/4'
+                          ? 'text-primary' 
+                          : 'text-foreground hover:scale-105'
                       }`}
-                    />
-                  </button>
-                </li>
-              ))}
-            </ul>
-
-            {/* Close button for better UX on mobile */}
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full glass-card transition-all duration-300 touch-manipulation"
-              style={{ minHeight: '44px', minWidth: '44px' }}
-              aria-label="Close menu"
-            >
-              <X className="w-5 h-5 sm:w-6 sm:h-6 text-[hsl(var(--dark-navy))]" />
-            </button>
-          </div>
+                    >
+                      {item.label}
+                    </button>
+                  </div>
+                ))}
+                
+                {/* Contact Info */}
+                <div 
+                  className="pt-12 space-y-4 overflow-hidden"
+                  style={{
+                    animation: `clipRevealUp 0.8s cubic-bezier(0.77, 0, 0.175, 1) 0.8s both`
+                  }}
+                >
+                  <div className="text-muted-foreground">
+                    <p>Callm3samuel@gmail.com</p>
+                    <p>+234 901 117 2838</p>
+                  </div>
+                  
+                  {/* Social Links */}
+                  <div className="flex justify-center space-x-6 pt-4">
+                    <a 
+                      href="https://github.com/Zikrypt" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                    >
+                      GitHub
+                    </a>
+                    <a 
+                      href="https://www.linkedin.com/in/zikora-okelo-8818252a8" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                    >
+                      LinkedIn
+                    </a>
+                    <a 
+                      href="https://x.com/HACKWITHZIK?t=9xLb6f-1sVy4CgdFp2sOWw&s=09" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                    >
+                      Twitter
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </nav>
       </header>
 
@@ -279,21 +257,6 @@ const Navigation = () => {
             border-color: hsl(var(--bright-red) / 0.4);
             box-shadow: 0 0 15px hsl(var(--bright-red) / 0.2);
           }
-          
-          .group:hover .hidden.hover\\:block {
-            display: block;
-          }
-        }
-
-        /* Touch device specific styles */
-        @media (hover: none) {
-          .group:active .scale-x-0 {
-            transform: scaleX(1);
-          }
-          
-          .group:active span {
-            color: white;
-          }
         }
 
         /* Smooth focus states for accessibility */
@@ -301,23 +264,6 @@ const Navigation = () => {
           outline: 2px solid hsl(var(--bright-red));
           outline-offset: 2px;
           border-radius: 4px;
-        }
-
-        /* Enhanced mobile backdrop with responsive border */
-        .md\\:hidden.fixed {
-          border-left: 1px solid hsl(var(--bright-red) / 0.15);
-        }
-
-        @media (max-width: 480px) {
-          .md\\:hidden.fixed {
-            border-left: none;
-            border-top: 1px solid hsl(var(--bright-red) / 0.15);
-          }
-        }
-
-        /* Hamburger line styling with responsive sizing */
-        .md\\:hidden span {
-          transform-origin: center;
         }
 
         /* Custom translate utilities for responsive precise animations */
@@ -333,16 +279,8 @@ const Navigation = () => {
           transform: translateY(16px);
         }
 
-        .translate-y-5 {
-          transform: translateY(20px);
-        }
-
         .translate-y-6 {
           transform: translateY(25px);
-        }
-
-        .translate-y-7 {
-          transform: translateY(30px);
         }
 
         /* Smooth scrolling enhancement */
@@ -445,6 +383,36 @@ const Navigation = () => {
           .fixed.top-0 {
             padding-top: max(env(safe-area-inset-top), 0.5rem);
           }
+        }
+
+        /* Scalvini menu animations */
+        @keyframes menuOverlayIn {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes clipRevealUp {
+          0% {
+            opacity: 0;
+            transform: translateY(100%);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .gradient-text-hero {
+          background: linear-gradient(135deg, hsl(var(--bright-red)), hsl(var(--dusty-purple)));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
       `}</style>
     </>

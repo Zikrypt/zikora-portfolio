@@ -174,7 +174,7 @@ const HeroSection = () => {
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               className="btn-secondary group"
             >
-              <span>Get in Touch</span>
+              <span>Download My Portfolio</span>
               <Download className="w-5 h-5 transition-transform group-hover:translate-y-1" />
             </button>
           </div>
