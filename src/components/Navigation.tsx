@@ -74,8 +74,7 @@ const Navigation = () => {
             }}
             onClick={() => scrollToSection('#home')}
           >
-            <span className="block sm:hidden">O.Z.</span>
-            <span className="hidden sm:block md:block">Okelo Zikora</span>
+            Okelo Zikora
           </div>
 
           {/* Desktop Navigation with responsive spacing and staggered reveal */}
