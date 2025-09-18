@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,19 +59,19 @@ const Navigation = () => {
 
   return (
     <>
-      {/* Combined Navigation */}
+      {/* Combined Navigation - Made More Compact */}
       <header
         className={`fixed top-0 w-full z-50 transition-all duration-900 px-responsive ${
-          scrolled ? 'glass-card py-1 sm:py-2' : 'py-2 sm:py-3 md:py-4'
-        } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-12 sm:-translate-y-15'}`}
+          scrolled ? 'glass-card py-1 sm:py-1.5' : 'py-1.5 sm:py-2 md:py-2.5'
+        } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8 sm:-translate-y-10'}`}
         style={{
           transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)'
         }}
       >
         <nav className="container-responsive flex items-center justify-between max-w-7xl">
-          {/* Logo with Scalvini style */}
+          {/* Logo with Scalvini style - Made More Compact */}
           <div
-            className={`text-lg sm:text-xl md:text-2xl font-bold cursor-pointer transition-all duration-700 ease-out ${
+            className={`text-sm sm:text-base md:text-lg font-bold cursor-pointer transition-all duration-700 ease-out ${
               isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-85'
             }`}
             style={{ 
@@ -84,14 +83,14 @@ const Navigation = () => {
             <span className="gradient-text-hero">Okelo Zikora Samuel</span>
           </div>
 
-          {/* Desktop Navigation with Scalvini minimal style */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation with Scalvini minimal style - More Compact */}
+          <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
             {navItems.map((item, index) => (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className={`relative font-medium transition-all duration-300 hover:text-primary ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 md:translate-y-6'
+                className={`relative font-medium text-sm transition-all duration-300 hover:text-primary ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
                 } ${
                   activeSection === item.href 
                     ? 'text-primary' 
@@ -100,8 +99,8 @@ const Navigation = () => {
                 style={{ 
                   transitionDelay: isVisible ? `${400 + index * 120}ms` : '0ms',
                   transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                  minHeight: '44px',
-                  minWidth: '44px'
+                  minHeight: '36px',
+                  minWidth: '36px'
                 }}
               >
                 {item.label}
@@ -113,37 +112,37 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button with morphing animation */}
+          {/* Mobile Menu Button - Made Much More Compact */}
           <button
-            className={`md:hidden p-2 sm:p-3 rounded-lg glass-card transition-all duration-700 ease-out relative overflow-hidden touch-manipulation ${
+            className={`md:hidden p-1.5 sm:p-2 rounded-lg glass-card transition-all duration-700 ease-out relative overflow-hidden touch-manipulation ${
               isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-85'
             }`}
             style={{ 
               transitionDelay: isVisible ? '600ms' : '0ms',
-              minHeight: '44px',
-              minWidth: '44px'
+              minHeight: '36px',
+              minWidth: '36px'
             }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMenuOpen}
           >
-            <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
+            <div className="relative w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
               {/* Hamburger to X morphing animation */}
               <div className="absolute">
-                <span className={`block w-5 sm:w-6 h-0.5 bg-[hsl(var(--dark-navy))] transform transition-all duration-400 ease-in-out ${
-                  isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-1.5 sm:-translate-y-2'
+                <span className={`block w-4 sm:w-5 h-0.5 bg-[hsl(var(--dark-navy))] transform transition-all duration-400 ease-in-out ${
+                  isMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-1 sm:-translate-y-1.5'
                 }`} />
-                <span className={`block w-5 sm:w-6 h-0.5 bg-[hsl(var(--dark-navy))] transition-all duration-400 ease-in-out ${
+                <span className={`block w-4 sm:w-5 h-0.5 bg-[hsl(var(--dark-navy))] transition-all duration-400 ease-in-out ${
                   isMenuOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
                 }`} />
-                <span className={`block w-5 sm:w-6 h-0.5 bg-[hsl(var(--dark-navy))] transform transition-all duration-400 ease-in-out ${
-                  isMenuOpen ? '-rotate-45 -translate-y-0.5' : 'translate-y-1.5 sm:translate-y-2'
+                <span className={`block w-4 sm:w-5 h-0.5 bg-[hsl(var(--dark-navy))] transform transition-all duration-400 ease-in-out ${
+                  isMenuOpen ? '-rotate-45 -translate-y-0.5' : 'translate-y-1 sm:translate-y-1.5'
                 }`} />
               </div>
             </div>
           </button>
 
-          {/* Scalvini Style Fullscreen Menu Overlay */}
+          {/* Scalvini Style Fullscreen Menu Overlay - Made More Compact for Mobile */}
           {isMenuOpen && (
             <div 
               className="fixed inset-0 z-40 flex items-center justify-center md:hidden"
@@ -152,8 +151,8 @@ const Navigation = () => {
                 animation: 'menuOverlayIn 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards'
               }}
             >
-              {/* Menu Items */}
-              <div className="text-center space-y-8">
+              {/* Menu Items - Made More Compact */}
+              <div className="text-center space-y-6">
                 {navItems.map((item, index) => (
                   <div
                     key={item.href}
@@ -164,7 +163,7 @@ const Navigation = () => {
                   >
                     <button
                       onClick={() => scrollToSection(item.href)}
-                      className={`block text-4xl md:text-6xl font-bold transition-all duration-300 hover:text-primary ${
+                      className={`block text-2xl md:text-4xl font-bold transition-all duration-300 hover:text-primary ${
                         activeSection === item.href 
                           ? 'text-primary' 
                           : 'text-foreground hover:scale-105'
@@ -175,25 +174,25 @@ const Navigation = () => {
                   </div>
                 ))}
                 
-                {/* Contact Info */}
+                {/* Contact Info - Made More Compact */}
                 <div 
-                  className="pt-12 space-y-4 overflow-hidden"
+                  className="pt-8 space-y-3 overflow-hidden"
                   style={{
                     animation: `clipRevealUp 0.8s cubic-bezier(0.77, 0, 0.175, 1) 0.8s both`
                   }}
                 >
-                  <div className="text-muted-foreground">
+                  <div className="text-muted-foreground text-sm">
                     <p>Callm3samuel@gmail.com</p>
                     <p>+234 901 117 2838</p>
                   </div>
                   
                   {/* Social Links */}
-                  <div className="flex justify-center space-x-6 pt-4">
+                  <div className="flex justify-center space-x-4 pt-3">
                     <a 
                       href="https://github.com/Zikrypt" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                      className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
                     >
                       GitHub
                     </a>
@@ -201,7 +200,7 @@ const Navigation = () => {
                       href="https://www.linkedin.com/in/zikora-okelo-8818252a8" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                      className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
                     >
                       LinkedIn
                     </a>
@@ -209,7 +208,7 @@ const Navigation = () => {
                       href="https://x.com/HACKWITHZIK?t=9xLb6f-1sVy4CgdFp2sOWw&s=09" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                      className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
                     >
                       Twitter
                     </a>
@@ -221,7 +220,7 @@ const Navigation = () => {
         </nav>
       </header>
 
-      {/* Enhanced responsive CSS for premium animations */}
+      {/* Enhanced responsive CSS - All Original Styling Preserved */}
       <style>{`
         /* Enhanced glass card with responsive blur and brand colors */
         .glass-card {
@@ -266,21 +265,17 @@ const Navigation = () => {
           border-radius: 4px;
         }
 
-        /* Custom translate utilities for responsive precise animations */
-        .-translate-y-12 {
-          transform: translateY(-48px);
+        /* Custom translate utilities for responsive precise animations - Made More Compact */
+        .-translate-y-8 {
+          transform: translateY(-32px);
         }
         
-        .-translate-y-15 {
-          transform: translateY(-60px);
+        .-translate-y-10 {
+          transform: translateY(-40px);
         }
 
-        .translate-y-4 {
-          transform: translateY(16px);
-        }
-
-        .translate-y-6 {
-          transform: translateY(25px);
+        .translate-y-3 {
+          transform: translateY(12px);
         }
 
         /* Smooth scrolling enhancement */
@@ -290,39 +285,39 @@ const Navigation = () => {
 
         /* Logo blur animation with responsive support */
         @supports (filter: blur(5px)) {
-          .text-lg, .text-xl, .text-2xl {
+          .text-sm, .text-base, .text-lg {
             transition: filter 0.7s ease-out;
           }
         }
 
-        /* Responsive container improvements */
+        /* Responsive container improvements - Made More Compact */
         .container-responsive {
           width: 100%;
           max-width: 1200px;
           margin-left: auto;
           margin-right: auto;
-          padding-left: 1rem;
-          padding-right: 1rem;
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
         }
 
         @media (min-width: 640px) {
+          .container-responsive {
+            padding-left: 1rem;
+            padding-right: 1rem;
+          }
+        }
+
+        @media (min-width: 768px) {
           .container-responsive {
             padding-left: 1.5rem;
             padding-right: 1.5rem;
           }
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
           .container-responsive {
             padding-left: 2rem;
             padding-right: 2rem;
-          }
-        }
-
-        @media (min-width: 1024px) {
-          .container-responsive {
-            padding-left: 2.5rem;
-            padding-right: 2.5rem;
           }
         }
 
@@ -413,6 +408,16 @@ const Navigation = () => {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+        }
+
+        /* Additional compact spacing utilities */
+        .py-1\.5 {
+          padding-top: 0.375rem;
+          padding-bottom: 0.375rem;
+        }
+
+        .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+          margin-left: 1rem;
         }
       `}</style>
     </>
